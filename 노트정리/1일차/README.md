@@ -74,7 +74,7 @@
         <pre><code>select {field1} as {별칭1}, {field2} as {별칭2} from {tab_name} where {별칭1}.dno = {별칭2}.dno;</code></pre>
         <br/>
 
-        ### 문자열다루기  
+        문자열다루기  
 
         <br/>
         포함  
@@ -87,7 +87,7 @@
         <pre><code>whre {field} like '_k%'</code></pre> 
         <br/>
 
-        ### 집계함수  
+        집계함수  
 
         <br/>
 
