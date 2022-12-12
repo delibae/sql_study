@@ -14,6 +14,6 @@
    ![Alt text](./img/3.PNG)  
    #
 4. 사원이름 첫 글자가 a부터 k까지 인 사원을 이름순으로 정렬.
-    <pre><code>select pname from personal order by pname;</code></pre>
+    <pre><code>select pname from personal where pname between 'a%' and 'k%' order by pname;</code></pre>
     ![Alt text](./img/4.PNG)  
     #
