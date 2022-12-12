@@ -91,7 +91,7 @@
 
         <br/>
 
-        sum() count() avg() max() min()
+        <pre><code>sum() count() avg() max() min()</code></pre>
 
         <br/>
 
