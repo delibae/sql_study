@@ -1,0 +1,4 @@
+1. select * from personal where not(job='clerk') and not(job='manager');
+2. select * from personal where startdate >= '91/01/01' and pay <= 2000;
+3. select * from personal where job = 'president' or job = 'salesman';
+4. select pname from personal order by pname;
