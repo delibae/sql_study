@@ -21,7 +21,7 @@
 
 1. Table 생성  
     <br/>
-    <pre><code>create table {table_name}(field1 field1_type is_null, field2 field2_type is_null, ...); </code></pre>
+    <pre><code>create table {table_name}({field1} {field1_type} {is_null}, {field2} {field2_type} {is_null}, ...); </code></pre>
     is_null => null or not null  
     <br/>
 2. Table 제거    
