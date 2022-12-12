@@ -1,4 +1,0 @@
-select * from personal where not(job='clerk') and not(job='manager');
-select * from personal where startdate >= '91/01/01' and pay <= 2000;
-select * from personal where job = 'president' or job = 'salesman';
-select pname from personal order by pname;
