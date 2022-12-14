@@ -198,8 +198,7 @@
 4. 수정  
     <br/>
     - max 수정
-        <pre><code>alter sequence {seq_name} maxValue {value};
-        </code></pre>  
+        <pre><code>alter sequence {seq_name} maxValue {value};</code></pre>  
     <br/>  
 
 5. 삭제  
