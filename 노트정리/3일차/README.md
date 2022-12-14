@@ -135,7 +135,7 @@
    commit 입력해야 저장이 됨
     - 새 cmd 창에서도 보임  
   <br/>
-2. rollback  
+2. rollback    
     실행취소  
     <br/>
 3. 병목현상 해결  
