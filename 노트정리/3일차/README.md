@@ -46,7 +46,25 @@
 7. switch(decode)  
     <br/>  
     <pre><code>select decode({c_name},{~이면},{~로},{~이면},{~로},...) from {t_name};</code></pre>  
+    <br/>  
+
+# Join and SubQuery  
+
+<br/>
+
+1. 범용(표준)
     <br/>
+    <pre><code>select {t1}.{c1}, {t2}.{c2} from {t1} join {t2} on {조건절}</code></pre>  
+    <br/>
+2. 오라클  
+    <br/>
+    <pre><code>select {t1}.{c1},{t2}.{c2} from {t1}, {t2} where {조건절}</code></pre>  
+    <br/>
+
+3. 별칭사용  
+   <br/>
+   <pre><code>select t.{c1}, tt.{c2} from {t1} t, {t2} tt where {조건절}</code></pre>  
+   <br/>  
 
 # Table
 
