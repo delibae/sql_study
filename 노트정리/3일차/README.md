@@ -113,19 +113,29 @@
 
 # Sequence
 
-1. 생성
+1. 생성  
+    <br/>
     <pre><code>CREATE SEQUENCE {seq_name} start with {s_point} increment by {plus_num};</code></pre>
-    *무조건 증가만 감소 없음
-1. 입력
-   <pre><code>insert into {tab_name} values({seq_name}.nextval,{value2},...)
-    </code></pre>
-2. 확인
-   <pre><code>select {seq_name}.currVal from dual;</code></pre>
-3. 수정
+    *무조건 증가만 감소 없음  
+    <br/>
+2. 입력  
+    <br/>
+    <pre><code>insert into {tab_name} values({seq_name}.nextval,{value2},...)
+    </code></pre>  
+    <br/>
+3. 확인  
+    <br/>
+    <pre><code>select {seq_name}.currVal from dual;</code></pre>  
+    <br/>
+4. 수정  
+    <br/>
     - max 수정
         <pre><code>alter sequence {seq_name} maxValue {value};
-        </code></pre>
-4. 삭제
+        </code></pre>  
+    <br/>  
+
+5. 삭제  
+    <br/>  
     <pre><code>drop sequence {seq_name};</code></pre>  
     <br/>
 
@@ -154,4 +164,57 @@
    <pre><code>savepoint {name}
    .....
    rollback to {name}
-   </code></pre>
+   </code></pre>  
+<br/>
+
+# View
+
+1. 생성  
+    <br/>
+    <pre><code>create view({별칭1},{별칭2},...){v_name} as {select where 문}</code></pre> 
+    * 생성시 column 별칭 부여 가능  
+ <br/>  
+
+1. 입력  
+    <br/>
+    <pre><code>insert into {v_name}({c_name},{c2_name},...) values({v1},{v2},..)</code></pre>  
+    *원본 데이터 수정 가능  
+    <br/>  
+    
+2. 수정  
+   <br/>
+    <pre><code>replace ...이하 create와 동일</code></pre>  
+    <br/>  
+3. 확인  
+   <br/>
+   <pre><code>select * from {v_name}</code></pre>  
+   <br/>  
+4. 삭제  
+   <br/>
+   <pre><code>drop view {v_name}</code></pre>  
+   <br/>  
+
+*join을 통해서도 생성 가능  
+
+\*별칭.* => 별칭 테이블 열 전체 선택  
+<br/>  
+
+# Top Query  
+
+<br/>  
+
+목표: 특정 기준(where절)에 따라 정렬후 상위 n개 출력
+
+
+1. 뷰 생성  
+    <br/>
+    <pre><code>create view {v_name} as {select where 문}</pre></code>  
+    <br/>
+
+2. 상위 n개만 출력  
+   <br/>
+   <pre><code> select * from {v_name} where rownum <= n</code></pre>
+   
+### 인라인 구문 활용
+
+<pre><code>select * from ({select where 문}) where rownum <= n</code></pre>
