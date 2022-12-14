@@ -108,4 +108,4 @@
 
     ### 제약조건 확인
 
-    <pre><code>select * from user_contraints where TABLE_NAME = "TABLENAME";</code></pre>
+    <pre><code>select * from user_contraints where TABLE_NAME = 'TABLENAME';</code></pre>
