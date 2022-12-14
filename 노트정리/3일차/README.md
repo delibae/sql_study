@@ -131,8 +131,23 @@
 
 # Transaction(commit, rollback)
 
-1. commit
+1. commit  
    commit 입력해야 저장이 됨
-    - 새 cmd 창에서도 보임
-2. rollback
-    실행취소
+    - 새 cmd 창에서도 보임  
+  <br/>
+2. rollback  
+    실행취소  
+    <br/>
+3. 병목현상 해결  
+   락걸기
+   <pre><code>ALTER TABLE {t_name} SET UNUSED({c_name});</code></pre>  
+   *가벼운 것부터 우선작업  
+    <br/>
+    컬럼제거
+    <pre><code>ALTER TABLE {t_name} DROP UNUSED COLUMNS;</code></pre>  
+    <br/>
+4. savepoint  
+   <pre><code>savepoint {name}
+   .....
+   rollback to {name}
+   </code></pre>
