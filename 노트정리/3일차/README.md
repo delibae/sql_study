@@ -213,8 +213,10 @@
 
 2. 상위 n개만 출력  
    <br/>
-   <pre><code> select * from {v_name} where rownum <= n</code></pre>
+   <pre><code> select * from {v_name} where rownum <= n</code></pre>  
+   <br/>
    
-### 인라인 구문 활용
+### 인라인 구문 활용  
+<br/>
 
 <pre><code>select * from ({select where 문}) where rownum <= n</code></pre>
