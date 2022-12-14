@@ -45,3 +45,67 @@
    <br/>
 
 # 테이블 제약 조건
+
+1. PK  
+    PK =  Unique + Not Null  
+    style1
+    <pre><code>{c_name} primary key
+    </code></pre>
+    style2
+    <pre><code>primary key({c_name})</code></pre>
+
+2. FK  
+   FK must Unique  
+   style1
+   <pre><code>{c_name} {c_type} references {ref_t_name}({ref_c_name})</code></pre> 
+   style2
+   <pre><code>Foreign Key({c_name}) References {ref_tab(ref_col)}</code></pre>
+
+3. is_null  
+   <pre><code>{c_name} {Null or NOT NULL}</code></pre>
+
+4. UK
+   style1
+   <pre><code>{c_name} {c_type} UNIQUE</code></pre>
+   style2
+   <pre><code>Unique({c_name})</code></pre>
+
+5. Check
+   <pre><code>{c_name} check({조건})</code></pre>  
+   ex
+   <pre><code>gender varchar(10) check(gender in('M','F'))</code></pre>  
+
+6. Default
+   <pre><code>{c_name} Defalut({value})</code></pre>
+
+7. constraint(제약조건명 지정)
+   <pre><code>CONSTRAINT {제약조건명} {제약조건}
+    </code></pre>  
+    <br/>
+    
+    제약조건명 지정 예시
+    
+    <pre><code>CREATE TABLE emp09 
+
+    (
+
+    empno number(2),
+
+    ename varchar2(20) not null,
+
+    addr varchar2(10),
+
+    deptno number(2),
+
+    CONSTRAINT emp09_empno_pk Primary Key(empno),
+
+    CONSTRAINT emp09_addr_uq Unique(addr),
+
+    CONSTRAINT emp09_deptno_fk Foreign Key(deptno) References dept(deptno) 
+
+    );
+    </code></pre>
+
+    ### 제약조건 확인
+
+    <pre><code>select * from user_contraints where TABLE_NAME = "TABLENAME";</code></pre>
