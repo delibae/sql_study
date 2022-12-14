@@ -1,3 +1,53 @@
+# 주요 내장 함수  
+<br/>
+
+1. 샘플 테이블(dual)  
+   <br/>
+   <pre><code>select {연산} from dual</code></pre>  
+   <br/>  
+
+2. 문자열  
+   <br/>
+   <pre><code>lower() upper() InitCap() concat() length() lengthb() substr() instr() lpad() rpad() trim()</code></pre>  
+   <br/>
+3. 숫자  
+   <br/>
+   <pre><code>round() abs()
+   floor() => 절삭
+   trunc({num},{point})
+   mod() => 나머지</code></pre>  
+   <br/>
+4. 날짜  
+    <br/>
+    <pre><code>sysdate => 현재날짜
+    months_between({날짜},{날짜})
+    add_months()
+    next_day({day}, {요일})
+    last_day({날짜}) => 마지막일
+    to_char(sysdate,{형태})
+    to_date({날짜},{형태})</code></pre>  
+    <br/>
+5. null 처리  
+    <br/>
+    <pre><code>nvl({c_name},{원하는값})</code></pre>  
+    <br/>  
+6. if else(case when then end)  
+    <br>
+    <pre><code>select {c_name1},{c_name2},
+    case
+        when {조건} then {변환값}
+        when {조건} then {변환값}
+        .
+        .
+        .
+    end as {c_name3}
+    from {t_name}</code></pre>  
+    <br/>
+7. switch(decode)  
+    <br/>  
+    <pre><code>select decode({c_name},{~이면},{~로},{~이면},{~로},...) from {t_name};</code></pre>  
+    <br/>
+
 # Table
 
 1. CREATE  
