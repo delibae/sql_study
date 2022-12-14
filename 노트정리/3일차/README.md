@@ -108,4 +108,31 @@
 
     ### 제약조건 확인
 
-    <pre><code>select * from user_contraints where TABLE_NAME = 'TABLENAME';</code></pre>
+    <pre><code>select * from user_contraints where TABLE_NAME = 'TABLENAME';</code></pre>  
+    <br/>
+
+# Sequence
+
+1. 생성
+    <pre><code>CREATE SEQUENCE {seq_name} start with {s_point} increment by {plus_num};</code></pre>
+    *무조건 증가만 감소 없음
+1. 입력
+   <pre><code>insert into {tab_name} values({seq_name}.nextval,{value2},...)
+    </code></pre>
+2. 확인
+   <pre><code>select {seq_name}.currVal from dual;</code></pre>
+3. 수정
+    - max 수정
+        <pre><code>alter sequence {seq_name} maxValue {value};
+        </code></pre>
+4. 삭제
+    <pre><code>drop sequence {seq_name};</code></pre>  
+    <br/>
+
+# Transaction(commit, rollback)
+
+1. commit
+   commit 입력해야 저장이 됨
+    - 새 cmd 창에서도 보임
+2. rollback
+    실행취소
