@@ -275,7 +275,7 @@
 
 1. 뷰 생성  
     <br/>
-    <pre><code>create view {v_name} as {select where 문}</pre></code>  
+    <pre><code>create view {v_name} as {select where order by 문}</pre></code>  
     <br/>
 
 2. 상위 n개만 출력  
@@ -286,4 +286,4 @@
 ### 인라인 구문 활용  
 <br/>
 
-<pre><code>select * from ({select where 문}) where rownum <= n</code></pre>
+<pre><code>select * from ({select where order by 문}) where rownum <= n</code></pre>
