@@ -1,0 +1,860 @@
+# 중고차 모델 정규화(논리)
+
+![정규화1](./img/정규화1.png)
+![정규화1](./img/정규화2.png)
+
+
+# 중고차 모델 정규화(물리) - DDL
+
+<pre><code>/* 등록 */
+CREATE TABLE add_car (
+	add_no NUMBER(5) NOT NULL, /* 등록번호 */
+	car_no NUMBER(5) NOT NULL, /* 차대번호 */
+	id VARCHAR2(10) NOT NULL /* id */
+)
+	STORAGE (
+		BUFFER_POOL DEFAULT
+	)
+	LOGGING
+	NOCOMPRESS
+	NOCACHE
+	NOPARALLEL
+	NOROWDEPENDENCIES
+	DISABLE ROW MOVEMENT;
+
+CREATE UNIQUE INDEX PK_add_car
+	ON add_car (
+		add_no ASC
+	)
+	STORAGE (
+		BUFFER_POOL DEFAULT
+	)
+	NOLOGGING
+	NOCOMPRESS
+	NOSORT
+	NOPARALLEL;
+
+ALTER TABLE add_car
+	ADD
+		CONSTRAINT PK_add_car
+		PRIMARY KEY (
+			add_no
+		)
+		NOT DEFERRABLE
+		INITIALLY IMMEDIATE
+		ENABLE
+		VALIDATE;
+
+
+/* 승용차 */
+CREATE TABLE normal_car (
+	car_no NUMBER(5) NOT NULL, /* 차대번호 */
+	car_size VARCHAR2(5) NOT NULL /* 크기 */
+)
+	STORAGE (
+		BUFFER_POOL DEFAULT
+	)
+	LOGGING
+	NOCOMPRESS
+	NOCACHE
+	NOPARALLEL
+	NOROWDEPENDENCIES
+	DISABLE ROW MOVEMENT;
+
+CREATE UNIQUE INDEX PK_normal_car
+	ON normal_car (
+		car_no ASC
+	)
+	STORAGE (
+		BUFFER_POOL DEFAULT
+	)
+	NOLOGGING
+	NOCOMPRESS
+	NOSORT
+	NOPARALLEL;
+
+ALTER TABLE normal_car
+	ADD
+		CONSTRAINT PK_normal_car
+		PRIMARY KEY (
+			car_no
+		)
+		NOT DEFERRABLE
+		INITIALLY IMMEDIATE
+		ENABLE
+		VALIDATE;
+
+
+/* 검사 */
+CREATE TABLE check_car (
+	car_no NUMBER(5) NOT NULL, /* 차대번호 */
+	accident CHAR(1) NOT NULL, /* 사고여부 */
+	drive VARCHAR2(30) NOT NULL, /* 주행진단 */
+	dashboard VARCHAR2(30) NOT NULL, /* 계기판수리/교체흔적 */
+	regi VARCHAR2(30) NOT NULL, /* 등록증확인 */
+	car_in VARCHAR2(30) NOT NULL, /* 차량내부진단 */
+	car_out VARCHAR2(30) NOT NULL, /* 차량외부진단 */
+	car_option VARCHAR2(30) NOT NULL, /* 옵션진단 */
+	engine VARCHAR2(30) NOT NULL, /* 엔진룸진단 */
+	bottom VARCHAR2(30) NOT NULL /* 하부진단 */
+)
+	STORAGE (
+		BUFFER_POOL DEFAULT
+	)
+	LOGGING
+	NOCOMPRESS
+	NOCACHE
+	NOPARALLEL
+	NOROWDEPENDENCIES
+	DISABLE ROW MOVEMENT;
+
+CREATE UNIQUE INDEX PK_check_car
+	ON check_car (
+		car_no ASC
+	)
+	STORAGE (
+		BUFFER_POOL DEFAULT
+	)
+	NOLOGGING
+	NOCOMPRESS
+	NOSORT
+	NOPARALLEL;
+
+ALTER TABLE check_car
+	ADD
+		CONSTRAINT PK_check_car
+		PRIMARY KEY (
+			car_no
+		)
+		NOT DEFERRABLE
+		INITIALLY IMMEDIATE
+		ENABLE
+		VALIDATE;
+
+
+
+
+/* 딜러회원 */
+CREATE TABLE dealer_info (
+	id VARCHAR2(10) NOT NULL, /* id */
+	sep_code CHAR(1) NOT NULL, /* 분류코드 */
+	bgrade NUMBER(1) NOT NULL, /* 신용등급 */
+	com_con NUMBER(10) NOT NULL /* 소속회사_연락처 */
+)
+	STORAGE (
+		BUFFER_POOL DEFAULT
+	)
+	LOGGING
+	NOCOMPRESS
+	NOCACHE
+	NOPARALLEL
+	NOROWDEPENDENCIES
+	DISABLE ROW MOVEMENT;
+
+CREATE UNIQUE INDEX PK_dealer_info
+	ON dealer_info (
+		id ASC,
+		sep_code ASC
+	)
+	STORAGE (
+		BUFFER_POOL DEFAULT
+	)
+	NOLOGGING
+	NOCOMPRESS
+	NOSORT
+	NOPARALLEL;
+
+ALTER TABLE dealer_info
+	ADD
+		CONSTRAINT PK_dealer_info
+		PRIMARY KEY (
+			id,
+			sep_code
+		)
+		NOT DEFERRABLE
+		INITIALLY IMMEDIATE
+		ENABLE
+		VALIDATE;
+
+
+/* 일반회원 */
+CREATE TABLE normal_ID (
+	id VARCHAR2(10) NOT NULL, /* ID */
+	grade NUMBER(2) NOT NULL, /* 회원등급 */
+	n_name VARCHAR2(5) NOT NULL, /* 이름 */
+	id2 NUMBER(13) NOT NULL, /* 주민번호 */
+	age NUMBER(3) NOT NULL, /* 나이 */
+	birth NUMBER(6) NOT NULL, /* 생년월일 */
+	phone NUMBER(11) NOT NULL, /* 핸드폰번호 */
+	addr VARCHAR2(20) NOT NULL /* 주소 */
+)
+	STORAGE (
+		BUFFER_POOL DEFAULT
+	)
+	LOGGING
+	NOCOMPRESS
+	NOCACHE
+	NOPARALLEL
+	NOROWDEPENDENCIES
+	DISABLE ROW MOVEMENT;
+
+CREATE UNIQUE INDEX PK_normal_ID
+	ON normal_ID (
+		id ASC
+	)
+	STORAGE (
+		BUFFER_POOL DEFAULT
+	)
+	NOLOGGING
+	NOCOMPRESS
+	NOSORT
+	NOPARALLEL;
+
+ALTER TABLE normal_ID
+	ADD
+		CONSTRAINT PK_normal_ID
+		PRIMARY KEY (
+			id
+		)
+		NOT DEFERRABLE
+		INITIALLY IMMEDIATE
+		ENABLE
+		VALIDATE;
+
+
+/* 차량보증 */
+CREATE TABLE guarantee (
+	co_no NUMBER(5) NOT NULL, /* 거래번호 */
+	gua_ex_date DATE NOT NULL /* 보증종료일 */
+)
+	STORAGE (
+		BUFFER_POOL DEFAULT
+	)
+	LOGGING
+	NOCOMPRESS
+	NOCACHE
+	NOPARALLEL
+	NOROWDEPENDENCIES
+	DISABLE ROW MOVEMENT;
+
+CREATE UNIQUE INDEX PK_guarantee
+	ON guarantee (
+		co_no ASC
+	)
+	STORAGE (
+		BUFFER_POOL DEFAULT
+	)
+	NOLOGGING
+	NOCOMPRESS
+	NOSORT
+	NOPARALLEL;
+
+ALTER TABLE guarantee
+	ADD
+		CONSTRAINT PK_guarantee
+		PRIMARY KEY (
+			co_no
+		)
+		NOT DEFERRABLE
+		INITIALLY IMMEDIATE
+		ENABLE
+		VALIDATE;
+
+
+
+/* 거래 */
+CREATE TABLE contract (
+	co_no NUMBER(5) NOT NULL, /* 거래번호 */
+	c_no NUMBER(5) NOT NULL, /* 차대번호 */
+	id VARCHAR2(10) NOT NULL, /* id */
+	co_date DATE NOT NULL, /* 구매일시 */
+	co_true NUMBER(1) NOT NULL /* 결제확인 */
+)
+	STORAGE (
+		BUFFER_POOL DEFAULT
+	)
+	LOGGING
+	NOCOMPRESS
+	NOCACHE
+	NOPARALLEL
+	NOROWDEPENDENCIES
+	DISABLE ROW MOVEMENT;
+
+CREATE UNIQUE INDEX PK_contract
+	ON contract (
+		co_no ASC
+	)
+	STORAGE (
+		BUFFER_POOL DEFAULT
+	)
+	NOLOGGING
+	NOCOMPRESS
+	NOSORT
+	NOPARALLEL;
+
+ALTER TABLE contract
+	ADD
+		CONSTRAINT PK_contract
+		PRIMARY KEY (
+			co_no
+		)
+		NOT DEFERRABLE
+		INITIALLY IMMEDIATE
+		ENABLE
+		VALIDATE;
+
+
+
+/* 광고 */
+CREATE TABLE adv (
+	adv_no NUMBER(5) NOT NULL, /* 광고번호 */
+	add_no NUMBER(5) NOT NULL, /* 등록번호 */
+	adv_ex_date DATE NOT NULL /* 종료시일 */
+)
+	STORAGE (
+		BUFFER_POOL DEFAULT
+	)
+	LOGGING
+	NOCOMPRESS
+	NOCACHE
+	NOPARALLEL
+	NOROWDEPENDENCIES
+	DISABLE ROW MOVEMENT;
+
+CREATE UNIQUE INDEX PK_adv
+	ON adv (
+		adv_no ASC
+	)
+	STORAGE (
+		BUFFER_POOL DEFAULT
+	)
+	NOLOGGING
+	NOCOMPRESS
+	NOSORT
+	NOPARALLEL;
+
+ALTER TABLE adv
+	ADD
+		CONSTRAINT PK_adv
+		PRIMARY KEY (
+			adv_no
+		)
+		NOT DEFERRABLE
+		INITIALLY IMMEDIATE
+		ENABLE
+		VALIDATE;
+
+
+
+/* 자동차 */
+CREATE TABLE car (
+	car_no NUMBER(5) NOT NULL, /* 차대번호 */
+	maker VARCHAR2(10) NOT NULL, /* 제조사 */
+	model VARCHAR2(10) NOT NULL, /* 모델 */
+	car_grade NUMBER(1) NOT NULL, /* 등급 */
+	car_date DATE NOT NULL, /* 연식 */
+	trans NUMBER(1) NOT NULL, /* 변속기 */
+	color VARCHAR2(10) NOT NULL, /* 도색 */
+	meter NUMBER(10) NOT NULL, /* 주행거리 */
+	price NUMBER(20) NOT NULL /* 가격 */
+)
+	STORAGE (
+		BUFFER_POOL DEFAULT
+	)
+	LOGGING
+	NOCOMPRESS
+	NOCACHE
+	NOPARALLEL
+	NOROWDEPENDENCIES
+	DISABLE ROW MOVEMENT;
+
+CREATE UNIQUE INDEX PK_car
+	ON car (
+		car_no ASC
+	)
+	STORAGE (
+		BUFFER_POOL DEFAULT
+	)
+	NOLOGGING
+	NOCOMPRESS
+	NOSORT
+	NOPARALLEL;
+
+ALTER TABLE car
+	ADD
+		CONSTRAINT PK_car
+		PRIMARY KEY (
+			car_no
+		)
+		NOT DEFERRABLE
+		INITIALLY IMMEDIATE
+		ENABLE
+		VALIDATE;
+
+
+
+
+/* 화물차 */
+CREATE TABLE truck (
+	car_no NUMBER(5) NOT NULL, /* 차대번호 */
+	shape VARCHAR2(10) NOT NULL /* 형태 */
+)
+	STORAGE (
+		BUFFER_POOL DEFAULT
+	)
+	LOGGING
+	NOCOMPRESS
+	NOCACHE
+	NOPARALLEL
+	NOROWDEPENDENCIES
+	DISABLE ROW MOVEMENT;
+
+CREATE UNIQUE INDEX PK_truck
+	ON truck (
+		car_no ASC
+	)
+	STORAGE (
+		BUFFER_POOL DEFAULT
+	)
+	NOLOGGING
+	NOCOMPRESS
+	NOSORT
+	NOPARALLEL;
+
+ALTER TABLE truck
+	ADD
+		CONSTRAINT PK_truck
+		PRIMARY KEY (
+			car_no
+		)
+		NOT DEFERRABLE
+		INITIALLY IMMEDIATE
+		ENABLE
+		VALIDATE;
+
+
+
+/* 스포츠카 */
+CREATE TABLE sport (
+	car_no NUMBER(5) NOT NULL, /* 차대번호 */
+	engine NUMBER(2) NOT NULL /* 마력 */
+)
+	STORAGE (
+		BUFFER_POOL DEFAULT
+	)
+	LOGGING
+	NOCOMPRESS
+	NOCACHE
+	NOPARALLEL
+	NOROWDEPENDENCIES
+	DISABLE ROW MOVEMENT;
+
+CREATE UNIQUE INDEX PK_sport
+	ON sport (
+		car_no ASC
+	)
+	STORAGE (
+		BUFFER_POOL DEFAULT
+	)
+	NOLOGGING
+	NOCOMPRESS
+	NOSORT
+	NOPARALLEL;
+
+ALTER TABLE sport
+	ADD
+		CONSTRAINT PK_sport
+		PRIMARY KEY (
+			car_no
+		)
+		NOT DEFERRABLE
+		INITIALLY IMMEDIATE
+		ENABLE
+		VALIDATE;
+
+
+
+/* 승합차 */
+CREATE TABLE van (
+	car_no NUMBER(5) NOT NULL, /* 차대번호 */
+	p_num NUMBER(2) NOT NULL /* 인승 */
+)
+	STORAGE (
+		BUFFER_POOL DEFAULT
+	)
+	LOGGING
+	NOCOMPRESS
+	NOCACHE
+	NOPARALLEL
+	NOROWDEPENDENCIES
+	DISABLE ROW MOVEMENT;
+
+CREATE UNIQUE INDEX PK_van
+	ON van (
+		car_no ASC
+	)
+	STORAGE (
+		BUFFER_POOL DEFAULT
+	)
+	NOLOGGING
+	NOCOMPRESS
+	NOSORT
+	NOPARALLEL;
+
+ALTER TABLE van
+	ADD
+		CONSTRAINT PK_van
+		PRIMARY KEY (
+			car_no
+		)
+		NOT DEFERRABLE
+		INITIALLY IMMEDIATE
+		ENABLE
+		VALIDATE;
+
+
+
+/* 광고연장요청 */
+CREATE TABLE add_ad (
+	adv_no NUMBER(5) NOT NULL, /* 광고번호 */
+	id VARCHAR2(10), /* id */
+	c_date DATE NOT NULL /* 변경시일 */
+)
+	STORAGE (
+		BUFFER_POOL DEFAULT
+	)
+	LOGGING
+	NOCOMPRESS
+	NOCACHE
+	NOPARALLEL
+	NOROWDEPENDENCIES
+	DISABLE ROW MOVEMENT;
+
+CREATE UNIQUE INDEX PK_add_ad
+	ON add_ad (
+		adv_no ASC
+	)
+	STORAGE (
+		BUFFER_POOL DEFAULT
+	)
+	NOLOGGING
+	NOCOMPRESS
+	NOSORT
+	NOPARALLEL;
+
+ALTER TABLE add_ad
+	ADD
+		CONSTRAINT PK_add_ad
+		PRIMARY KEY (
+			adv_no
+		)
+		NOT DEFERRABLE
+		INITIALLY IMMEDIATE
+		ENABLE
+		VALIDATE;
+
+
+
+/* 회원 */
+CREATE TABLE member (
+	id VARCHAR2(10) NOT NULL, /* id */
+	grade NUMBER(2) NOT NULL, /* 회원등급 */
+	name VARCHAR2(5) NOT NULL, /* 이름 */
+	id2 NUMBER(13) NOT NULL, /* 주민번호 */
+	age NUMBER(3) NOT NULL, /* 나이 */
+	birth NUMBER(6) NOT NULL, /* 생년월일 */
+	phone NUMBER(11) NOT NULL, /* 핸드폰번호 */
+	addr VARCHAR2(20) NOT NULL /* 주소 */
+)
+	STORAGE (
+		BUFFER_POOL DEFAULT
+	)
+	LOGGING
+	NOCOMPRESS
+	NOCACHE
+	NOPARALLEL
+	NOROWDEPENDENCIES
+	DISABLE ROW MOVEMENT;
+
+CREATE UNIQUE INDEX PK_member
+	ON member (
+		id ASC
+	)
+	STORAGE (
+		BUFFER_POOL DEFAULT
+	)
+	NOLOGGING
+	NOCOMPRESS
+	NOSORT
+	NOPARALLEL;
+
+ALTER TABLE member
+	ADD
+		CONSTRAINT PK_member
+		PRIMARY KEY (
+			id
+		)
+		NOT DEFERRABLE
+		INITIALLY IMMEDIATE
+		ENABLE
+		VALIDATE;
+
+
+
+/* 회원분류 */
+CREATE TABLE sep_member (
+	id VARCHAR2(10) NOT NULL, /* id */
+	sep_code CHAR(1) NOT NULL /* 분류코드 */
+)
+	STORAGE (
+		BUFFER_POOL DEFAULT
+	)
+	LOGGING
+	NOCOMPRESS
+	NOCACHE
+	NOPARALLEL
+	NOROWDEPENDENCIES
+	DISABLE ROW MOVEMENT;
+
+CREATE UNIQUE INDEX PK_sep_member
+	ON sep_member (
+		id ASC,
+		sep_code ASC
+	)
+	STORAGE (
+		BUFFER_POOL DEFAULT
+	)
+	NOLOGGING
+	NOCOMPRESS
+	NOSORT
+	NOPARALLEL;
+
+ALTER TABLE sep_member
+	ADD
+		CONSTRAINT PK_sep_member
+		PRIMARY KEY (
+			id,
+			sep_code
+		)
+		NOT DEFERRABLE
+		INITIALLY IMMEDIATE
+		ENABLE
+		VALIDATE;
+
+
+
+ALTER TABLE add_car
+	ADD
+		CONSTRAINT FK_car_TO_add_car
+		FOREIGN KEY (
+			car_no
+		)
+		REFERENCES car (
+			car_no
+		)
+		NOT DEFERRABLE
+		INITIALLY IMMEDIATE
+		ENABLE
+		VALIDATE;
+
+ALTER TABLE add_car
+	ADD
+		CONSTRAINT FK_member_TO_add_car
+		FOREIGN KEY (
+			id
+		)
+		REFERENCES member (
+			id
+		)
+		NOT DEFERRABLE
+		INITIALLY IMMEDIATE
+		ENABLE
+		VALIDATE;
+
+ALTER TABLE normal_car
+	ADD
+		CONSTRAINT FK_car_TO_normal_car
+		FOREIGN KEY (
+			car_no
+		)
+		REFERENCES car (
+			car_no
+		)
+		NOT DEFERRABLE
+		INITIALLY IMMEDIATE
+		ENABLE
+		VALIDATE;
+
+ALTER TABLE check_car
+	ADD
+		CONSTRAINT FK_car_TO_check_car
+		FOREIGN KEY (
+			car_no
+		)
+		REFERENCES car (
+			car_no
+		)
+		NOT DEFERRABLE
+		INITIALLY IMMEDIATE
+		ENABLE
+		VALIDATE;
+
+ALTER TABLE dealer_info
+	ADD
+		CONSTRAINT FK_sep_member_TO_dealer_info
+		FOREIGN KEY (
+			id,
+			sep_code
+		)
+		REFERENCES sep_member (
+			id,
+			sep_code
+		)
+		NOT DEFERRABLE
+		INITIALLY IMMEDIATE
+		ENABLE
+		VALIDATE;
+
+ALTER TABLE guarantee
+	ADD
+		CONSTRAINT FK_contract_TO_guarantee
+		FOREIGN KEY (
+			co_no
+		)
+		REFERENCES contract (
+			co_no
+		)
+		NOT DEFERRABLE
+		INITIALLY IMMEDIATE
+		ENABLE
+		VALIDATE;
+
+ALTER TABLE contract
+	ADD
+		CONSTRAINT FK_car_TO_contract
+		FOREIGN KEY (
+			c_no
+		)
+		REFERENCES car (
+			car_no
+		)
+		NOT DEFERRABLE
+		INITIALLY IMMEDIATE
+		ENABLE
+		VALIDATE;
+
+ALTER TABLE contract
+	ADD
+		CONSTRAINT FK_member_TO_contract
+		FOREIGN KEY (
+			id
+		)
+		REFERENCES member (
+			id
+		)
+		NOT DEFERRABLE
+		INITIALLY IMMEDIATE
+		ENABLE
+		VALIDATE;
+
+ALTER TABLE adv
+	ADD
+		CONSTRAINT FK_add_car_TO_adv
+		FOREIGN KEY (
+			add_no
+		)
+		REFERENCES add_car (
+			add_no
+		)
+		NOT DEFERRABLE
+		INITIALLY IMMEDIATE
+		ENABLE
+		VALIDATE;
+
+ALTER TABLE adv
+	ADD
+		CONSTRAINT FK_add_ad_TO_adv
+		FOREIGN KEY (
+			adv_no
+		)
+		REFERENCES add_ad (
+			adv_no
+		)
+		NOT DEFERRABLE
+		INITIALLY IMMEDIATE
+		ENABLE
+		VALIDATE;
+
+ALTER TABLE truck
+	ADD
+		CONSTRAINT FK_car_TO_truck
+		FOREIGN KEY (
+			car_no
+		)
+		REFERENCES car (
+			car_no
+		)
+		NOT DEFERRABLE
+		INITIALLY IMMEDIATE
+		ENABLE
+		VALIDATE;
+
+ALTER TABLE sport
+	ADD
+		CONSTRAINT FK_car_TO_sport
+		FOREIGN KEY (
+			car_no
+		)
+		REFERENCES car (
+			car_no
+		)
+		NOT DEFERRABLE
+		INITIALLY IMMEDIATE
+		ENABLE
+		VALIDATE;
+
+ALTER TABLE van
+	ADD
+		CONSTRAINT FK_car_TO_van
+		FOREIGN KEY (
+			car_no
+		)
+		REFERENCES car (
+			car_no
+		)
+		NOT DEFERRABLE
+		INITIALLY IMMEDIATE
+		ENABLE
+		VALIDATE;
+
+ALTER TABLE add_ad
+	ADD
+		CONSTRAINT FK_member_TO_add_ad
+		FOREIGN KEY (
+			id
+		)
+		REFERENCES member (
+			id
+		)
+		NOT DEFERRABLE
+		INITIALLY IMMEDIATE
+		ENABLE
+		VALIDATE;
+
+ALTER TABLE sep_member
+	ADD
+		CONSTRAINT FK_member_TO_sep_member
+		FOREIGN KEY (
+			id
+		)   
+		REFERENCES member (
+			id
+		)
+		NOT DEFERRABLE
+		INITIALLY IMMEDIATE
+		ENABLE
+		VALIDATE;</code></pre>
+
+# 테이블 결과  
+
+![테이블](./img/table.png)
