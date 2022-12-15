@@ -1,7 +1,7 @@
 # 중고차 모델 정규화(논리)
 
-![정규화1](./img/정규화1.png)
-![정규화1](./img/정규화2.png)
+![정규화1](img/정규화1.png)
+![정규화1](img/정규화2.png)
 
 
 # 중고차 모델 정규화(물리) - DDL
@@ -857,4 +857,4 @@ ALTER TABLE sep_member
 
 # 테이블 결과  
 
-![테이블](./img/table.png)
+![테이블](img/table.png)
