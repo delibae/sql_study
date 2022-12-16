@@ -4,7 +4,53 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<body>
+<script>
 
+</script>
+<body>
+<form action="http://127.0.0.1:5000/addset/{{value}}" style="border:1px solid #ccc" method="post">
+    <div class="container">
+        <h1>Update Asset</h1>
+        <hr>
+        <label for="cash"><b>cash</b></label>
+        <input type="text" placeholder="Enter Cash" name="cash" required>
+        <label for="real_asset"><b>Real Asset</b></label>
+        <input type="text" placeholder="Enter RealAsset" name="real_asset" required>
+        <label for="loan"><b>Loan</b></label>
+        <input type="text" placeholder="Loan" name="loan" required>
+
+        <div class="clearfix">
+            <button type="submit" class="signupbtn">Set Asset</button>
+        </div>
+    </div>
+</form>
+
+<form action="http://127.0.0.1:5000/addcon/{{value}}" style="border:1px solid #ccc" method="post">
+    <div class="container">
+        <h1>Add Consumption</h1>
+        <hr>
+        <label for="amount"><b>Price</b></label>
+        <input type="text" placeholder="Enter Price" name="amount" required>
+        <label for="method_code"><b>Method_Code</b></label>
+        <input type="text" placeholder="Enter Method_Code" name="method_code" required>
+        <label for="category_code"><b>Category_Code</b></label>
+        <input type="text" placeholder="Category_Code" name="category_code" required>
+
+        <div class="clearfix">
+            <button type="submit" class="signupbtn">Set Consumption</button>
+        </div>
+    </div>
+</form>
+
+<div class="container">
+    <h1>Current Asset</h1>
+    <hr>
+    <p>Cash: {{cash}} Real Asset: {{ real_asset }} Loan: {{ loan }}</p>
+</div>
+<div class="container">
+    <h1>Current Cumsumption</h1>
+    <hr>
+    <p>{{ con }}</p>
+</div>
 </body>
 </html>

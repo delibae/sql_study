@@ -23,13 +23,13 @@ def post_meminfo():
     mem_dao = memdao()
     data = request.form.to_dict(flat=False)
 
-    print(data)
+    # print(data)
     # print([data[0][1], data[1][1], data[2][1], data[3][1], data[4][1],
     #             data[5][1]])
     mem_dao.ins(data['id'][0], data['pw'][0], data['f_name'][0], data['l_name'][0], data['age'][0],
                 data['e_mail'][0])
-    print(data['id'][0], data['pw'][0], data['f_name'][0], data['l_name'][0], data['age'][0],
-                data['e_mail'][0])
+    # print(data['id'][0], data['pw'][0], data['f_name'][0], data['l_name'][0], data['age'][0],
+    #             data['e_mail'][0])
     return redirect("http://127.0.0.1:5000/login")
 
 @app.route('/login')
@@ -38,6 +38,7 @@ def login():
 
 @app.route('/checklogin', methods=['POST'])
 def checklogin():
+
     data = request.form.to_dict(flat=False)
     id = data['id'][0]
     pw = data['pw'][0]
@@ -45,13 +46,70 @@ def checklogin():
     curs.execute(sql)
     rows = curs.fetchall()
     db.commit()
+
+
     if rows == None:
         return redirect("http://127.0.0.1:5000/login")
     else:
-        return redirect("http://127.0.0.1:5000/main")
-    
+        return redirect(f"http://127.0.0.1:5000/main/{id}")
+
+@app.route('/main/<id>')
+def main(id):
+    asset_dao = assetdao()
+    # print(asset_dao.get(id))
+    con_dao = condao()
+    # print(con_dao.get(id))
+
+    set = json.dumps(asset_dao.get(id))
+    con = json.dumps(con_dao.get(id))
+
+    set = json.loads(set)
+    cash = set[0][1]
+    real_asset = set[0][2]
+    loan = set[0][3]
+    con = json.loads(con)
+
+
+    return render_template('main.html',value=id , cash = cash, real_asset = real_asset, loan = loan, con=con)
+
+@app.route('/addcon/<id>', methods=['POST'])
+def addcon(id):
+    data = request.form.to_dict(flat=False)
+    con_dao = condao()
+    # print([id,data['amount'][0],data['method_code'][0],data['category_code'][0]])
+    con_dao.ins(id,data['amount'][0],data['method_code'][0],data['category_code'][0])
+
+
+    return redirect(f"http://127.0.0.1:5000/main/{id}")
+
+@app.route('/addset/<id>', methods=['POST'])
+def addset(id):
+    data = request.form.to_dict(flat=False)
+    cash = data['cash'][0]
+    real_asset = data['real_asset'][0]
+    loan = data['loan'][0]
+    asset_dao = assetdao()
+    # try:
+    #     asset_dao.ins(id, cash, real_asset, loan)
+
+    asset_dao.upd(id, cash, real_asset, loan)
+
+
+    return redirect(f"http://127.0.0.1:5000/main/{id}")
+
+
+
+@app.route('/getsetcon/<id>')
+def getsetcon(id):
+    asset_dao = assetdao()
+    # print(asset_dao.get(id))
+    con_dao = condao()
+    # print(con_dao.get(id))
+    return redirect(f"http://127.0.0.1:5000/main/{id}")
 
 if '__name__' == '__main__':
     app.run()
 
 app.run(host='0.0.0.0', port=8080)
+
+

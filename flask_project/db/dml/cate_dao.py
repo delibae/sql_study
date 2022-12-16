@@ -55,8 +55,8 @@ class catedao:
 
 if __name__ == '__main__':
     mt_dao = catedao()
-    mt_list = mt_dao.get()
-    print(mt_list)
+    # mt_list = mt_dao.get()
+    # print(mt_list)
     # mt_dao.ins('eat')
     # mt_list = mt_dao.get()
     # print(mt_list)

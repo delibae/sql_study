@@ -7,12 +7,12 @@ class condao:
         self.pw = '1234'
         self.t_name = 'consumption'
 
-    def get(self):
+    def get(self, id):
         ret = []
         db = pymysql.connect(host='localhost', user='root', db=self.db, password=self.pw, charset='utf8')
         curs = db.cursor()
 
-        sql = f"select * from {self.t_name}";
+        sql = f"select * from {self.t_name} where id = '{id}'";
         curs.execute(sql)
 
         rows = curs.fetchall()
@@ -23,6 +23,7 @@ class condao:
         db.commit()
         db.close()
         return rows
+
 
     def ins(self, id, amount, method_code, category_code):
         db = pymysql.connect(host='localhost', user='root', db=self.db, password=self.pw, charset='utf8')
