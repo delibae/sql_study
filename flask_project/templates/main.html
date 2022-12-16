@@ -31,10 +31,10 @@
         <hr>
         <label for="amount"><b>Price</b></label>
         <input type="text" placeholder="Enter Price" name="amount" required>
-        <label for="method_code"><b>Method_Code</b></label>
-        <input type="text" placeholder="Enter Method_Code" name="method_code" required>
-        <label for="category_code"><b>Category_Code</b></label>
-        <input type="text" placeholder="Category_Code" name="category_code" required>
+        <label for="method_name"><b>Method_Name</b></label>
+        <input type="text" placeholder="Enter Method_Code" name="method_name" required>
+        <label for="category_name"><b>Category_Name</b></label>
+        <input type="text" placeholder="Category_Name" name="category_name" required>
 
         <div class="clearfix">
             <button type="submit" class="signupbtn">Set Consumption</button>
@@ -50,7 +50,7 @@
 <div class="container">
     <h1>Current Cumsumption</h1>
     <hr>
-    <p>{{ con }}</p>
+    <p>Total Consumption: {{ total_con }}</p>
 </div>
 </body>
 </html>

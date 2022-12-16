@@ -7,12 +7,12 @@ class catedao:
         self.pw = '1234'
         self.t_name = 'category'
 
-    def get(self):
+    def get(self, category_name):
         ret = []
         db = pymysql.connect(host='localhost', user='root', db=self.db, password=self.pw, charset='utf8')
         curs = db.cursor()
 
-        sql = f"select * from {self.t_name}";
+        sql = f"select * from {self.t_name} where category_name = '{category_name}'";
         curs.execute(sql)
 
         rows = curs.fetchall()

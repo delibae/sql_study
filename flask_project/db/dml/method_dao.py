@@ -7,12 +7,12 @@ class mtdao:
         self.pw = '1234'
         self.t_name = 'method'
 
-    def get(self):
+    def get(self, method_name):
         ret = []
         db = pymysql.connect(host='localhost', user='root', db=self.db, password=self.pw, charset='utf8')
         curs = db.cursor()
 
-        sql = f"select * from {self.t_name}";
+        sql = f"select * from {self.t_name} where method_name = '{method_name}'";
         curs.execute(sql)
 
         rows = curs.fetchall()

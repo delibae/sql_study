@@ -51,11 +51,11 @@ ALTER TABLE asset
 /* 새 테이블3 */
 -- SQLINES LICENSE FOR EVALUATION USE ONLY
 CREATE TABLE consumption (
-	cons_no DOUBLE NOT NULL, /* 새 컬럼5 */
+	cons_no INT(11) NOT NULL, /* 새 컬럼5 */
 	id VARCHAR(10) NOT NULL, /* 새 컬럼 */
 	amount DOUBLE NOT NULL, /* 새 컬럼2 */
-	method_code DOUBLE NOT NULL, /* 새 컬럼3 */
-	category_code DOUBLE NOT NULL /* 새 컬럼4 */
+	method_code INT(11) NOT NULL, /* 새 컬럼3 */
+	category_code INT(11) NOT NULL/* 새 컬럼4 */
 );
 
 -- SQLINES LICENSE FOR EVALUATION USE ONLY
@@ -71,12 +71,13 @@ ALTER TABLE consumption
 			cons_no
 		);
 
+ALTER TABLE consumption MODIFY cons_no INTEGER NOT NULL AUTO_INCREMENT;
 
 
 /* 새 테이블4 */
 -- SQLINES LICENSE FOR EVALUATION USE ONLY
 CREATE TABLE method (
-	method_code DOUBLE NOT NULL, /* 새 컬럼 */
+	method_code INT(11) NOT NULL, /* 새 컬럼 */
 	method_name VARCHAR(10) NOT NULL /* 새 컬럼2 */
 );
 
@@ -93,11 +94,13 @@ ALTER TABLE method
 			method_code
 		);
 
+ALTER TABLE method MODIFY method_code INTEGER NOT NULL AUTO_INCREMENT;
+
 
 /* 새 테이블5 */
 -- SQLINES LICENSE FOR EVALUATION USE ONLY
 CREATE TABLE category (
-	category_code DOUBLE NOT NULL, /* 새 컬럼 */
+	category_code INT(11) NOT NULL, /* 새 컬럼 */
 	category_name VARCHAR(10) NOT NULL /* 새 컬럼2 */
 );
 
@@ -113,6 +116,8 @@ ALTER TABLE category
 		PRIMARY KEY (
 			category_code
 		);
+
+ALTER TABLE category MODIFY category_code INTEGER NOT NULL AUTO_INCREMENT;
 
 
 
