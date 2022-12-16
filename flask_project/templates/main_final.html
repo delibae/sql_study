@@ -1,0 +1,137 @@
+<html>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+<body>
+<div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-3 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5"
+                                                                                         width="150px"
+                                                                                         src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span
+                    class="font-weight-bold">{{ value }}</span><span
+                    class="text-black-50"></span><span> </span></div>
+        </div>
+        <div class="col-md-5 border-right">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Account Book</h4>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="text-right">Update Asset</h5>
+                </div>
+                <div class="row mt-2">
+                    <form action="http://127.0.0.1:5000/addset/{{ value }}" method="post">
+                        <div class="container">
+                            <label for="cash" la><b>cash</b></label>
+                            <input class="form-control" type="text" placeholder="Enter Cash" name="cash" required>
+                            <label for="real_asset"><b>Real Asset</b></label>
+                            <input class="form-control" type="text" placeholder="Enter RealAsset" name="real_asset"
+                                   required>
+                            <label for="loan"><b>Loan</b></label>
+                            <input class="form-control" type="text" placeholder="Loan" name="loan" required>
+                            <br/>
+                            <div class="clearfix">
+                                <button class="btn btn-primary profile-button" type="submit" class="signupbtn">Set
+                                    Asset
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <form action="http://127.0.0.1:5000/addcon/{{ value }}" method="post">
+                    <div class="container">
+                        <hr>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="text-right">Add Consumption</h5>
+                        </div>
+                        <label for="amount"><b>Price</b></label>
+                        <input class="form-control" type="text" placeholder="Enter Price" name="amount" required>
+                        <label for="method_name"><b>Method_Name</b></label>
+                        <input class="form-control" type="text" placeholder="Enter Method_Code" name="method_name"
+                               required>
+                        <label for="category_name"><b>Category_Name</b></label>
+                        <input class="form-control" type="text" placeholder="Category_Name" name="category_name"
+                               required>
+                        <br/>
+                        <div class="clearfix">
+                            <button class="btn btn-primary profile-button" type="submit" class="signupbtn">Set
+                                Consumption
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-3 py-5">
+                <div class="row mt-3">
+                    <div class="container">
+                        <h5>Current Asset</h5>
+                        <hr>
+                        <p>Cash: {{ cash }} Real Asset: {{ real_asset }} Loan: {{ loan }}</p>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="container">
+                        <h5>Current Cumsumption</h5>
+                        <hr>
+                        <p>Total Consumption: {{ total_con }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</body>
+<style>
+    body {
+        background: rgb(99, 39, 120)
+    }
+
+    .form-control:focus {
+        box-shadow: none;
+        border-color: #BA68C8
+    }
+
+    .profile-button {
+        background: rgb(99, 39, 120);
+        box-shadow: none;
+        border: none
+    }
+
+    .profile-button:hover {
+        background: #682773
+    }
+
+    .profile-button:focus {
+        background: #682773;
+        box-shadow: none
+    }
+
+    .profile-button:active {
+        background: #682773;
+        box-shadow: none
+    }
+
+    .back:hover {
+        color: #682773;
+        cursor: pointer
+    }
+
+    .labels {
+        font-size: 11px
+    }
+
+    .add-experience:hover {
+        background: #BA68C8;
+        color: #fff;
+        cursor: pointer;
+        border: solid 1px #BA68C8
+    }
+</style>
+</html>

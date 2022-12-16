@@ -33,6 +33,11 @@ def main(id):
     con = json.loads(con)
     if len(con) == 0:
         con = 'None'
+        total_con = 0
+        cash = 0
+        real_asset = 0
+        loan = 0
+
     else:
         con_numpy = np.array(con)
         print(con_numpy)
@@ -41,7 +46,7 @@ def main(id):
         total_con = sum(total_con)
         pass
 
-    return render_template('main.html',value=id , cash = cash, real_asset = real_asset, loan = loan, con=con, total_con = total_con)
+    return render_template('main_final.html',value=id , cash = cash, real_asset = real_asset, loan = loan, con=con, total_con = total_con)
 
 @app.route('/')
 def index():
